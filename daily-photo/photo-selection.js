@@ -21,8 +21,8 @@ async function fetchPhotoList() {
       },
     }
   );
-
-  return response.entries.items;
+  const json = await response.json();
+  return json.entries;
 }
 
 /**
