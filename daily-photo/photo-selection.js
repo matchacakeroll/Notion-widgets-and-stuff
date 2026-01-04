@@ -11,12 +11,16 @@ const PATH = "daily-photo/images";
  * @return {Promise<Array<{type: string, size: number, name: string, path: string, sha: string, url: string, git_url: (string|null), html_url: (string|null), download_url: (string|null)}>>}
  */
 async function fetchPhotoList() {
-  const response = await fetch({
-    url: `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
-    headers: {
-      Accept: "application/vnd.github.object+json",
-    },
-  });
+  const response = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,
+    {
+      method: "GET",
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+        Accept: "application/vnd.github.object+json",
+      },
+    }
+  );
 
   return response.entries.items;
 }
